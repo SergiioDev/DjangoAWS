@@ -28,7 +28,10 @@ INSTALLED_APPS = [
 
     # Models
     'organization',
-    'users'
+    'users',
+
+    # REST API
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
