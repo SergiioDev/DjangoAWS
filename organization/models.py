@@ -4,7 +4,7 @@ from . import constants
 
 
 class TimestampModel(models.Model):
-    created = models.DateTimeField(auto_now_add=True),
+    created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -12,9 +12,9 @@ class TimestampModel(models.Model):
 
 
 class Organization(TimestampModel):
-    name = models.CharField(max_length=255),
-    registration_code = models.CharField(max_length=50, unique=True),
-    established_on = models.DateField(),
+    name = models.CharField(max_length=255)
+    registration_code = models.CharField(max_length=50, unique=True)
+    established_on = models.DateField()
     address = models.TextField(null=True)
 
     class Meta:
@@ -25,6 +25,6 @@ class Organization(TimestampModel):
 
 
 class BoardMembers(TimestampModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE),
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE),
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     designation = models.CharField(max_length=20, choices=constants.BOARD_MEMBERS)
