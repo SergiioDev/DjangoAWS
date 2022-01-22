@@ -44,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     about = models.TextField('about', max_length=500, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    organization = models.ForeignKey(Organization, on_delete=CASCADE)
+    organization = models.ForeignKey(Organization, on_delete=CASCADE, null=True)
     position = models.CharField(max_length=200, blank=True)
 
     objects = CustomAccountManager()
