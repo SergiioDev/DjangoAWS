@@ -7,7 +7,7 @@ from organizations.models import Organization
 from . import serializer
 
 
-class OrganizationAPI(ListCreateAPIView):
+class OrganizationListCreate(ListCreateAPIView):
     queryset = Organization.objects.all()
     serializer_class = serializer.OrganizationSerializer
     permission_classes = (AllowAny,)
@@ -19,7 +19,7 @@ class OrganizationAPI(ListCreateAPIView):
         headers = self.get_success_headers(serializer.data)
         return Response({"status": "Sucesss",
                          "message": "Organization created!",
-                         "data": serializer.data},
+                         "Organization": serializer.data},
                         status=status.HTTP_201_CREATED,
                         headers=headers)
 
