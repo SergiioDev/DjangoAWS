@@ -1,6 +1,6 @@
 from rest_framework import status
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, get_object_or_404, ListAPIView, CreateAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from users.models import User
 from . import serializer
@@ -9,14 +9,14 @@ from . import serializer
 class UserList(ListAPIView):
     queryset = User.objects.all()
     serializer_class = serializer.UserSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated, )
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
-        serializer = self.get_serializer(queryset, many=True)
+        serializer_class = self.get_serializer(queryset, many=True)
         return Response({"status": "Success",
-                         "Users": serializer.data})
+                         "Users": serializer_class.data})
 
 
 class UserRegister(CreateAPIView):
@@ -29,7 +29,7 @@ class UserRegister(CreateAPIView):
         serializer_class.is_valid(raise_exception=True)
         self.perform_create(serializer_class)
         headers = self.get_success_headers(serializer_class.data)
-        return Response({"status": "Sucesss",
+        return Response({"status": "Success",
                          "message": "User created!",
                          "User": serializer_class.data},
                         status=status.HTTP_201_CREATED,
@@ -38,6 +38,7 @@ class UserRegister(CreateAPIView):
 
 class UserRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = serializer.UserSerializer
+    permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
         return User.objects.filter(id=self.kwargs.get('pk'))
