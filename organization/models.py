@@ -1,6 +1,4 @@
-from users.models import User
 from django.db import models
-from . import constants
 
 
 class TimestampModel(models.Model):
@@ -22,9 +20,3 @@ class Organization(TimestampModel):
 
     def __str__(self):
         return self.name
-
-
-class BoardMembers(TimestampModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
-    designation = models.CharField(max_length=20, choices=constants.BOARD_MEMBERS)
