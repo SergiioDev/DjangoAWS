@@ -13,22 +13,22 @@ class OrganizationListCreate(ListCreateAPIView):
     permission_classes = (AllowAny,)
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response({"status": "Sucesss",
+        serializer_class = self.get_serializer(data=request.data)
+        serializer_class.is_valid(raise_exception=True)
+        self.perform_create(serializer_class)
+        headers = self.get_success_headers(serializer_class.data)
+        return Response({"status": "Success",
                          "message": "Organization created!",
-                         "Organization": serializer.data},
+                         "Organization": serializer_class.data},
                         status=status.HTTP_201_CREATED,
                         headers=headers)
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({"status": "Sucess",
-                         "Organizations": serializer.data})
+        serializer_class = self.get_serializer(queryset, many=True)
+        return Response({"status": "Success",
+                         "Organizations": serializer_class.data})
 
 
 class OrganizationRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
@@ -63,40 +63,41 @@ class OrganizationRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
-        serializer = self.get_serializer(instance)
+        serializer_class = self.get_serializer(instance)
 
         if not instance:
-            return Response({"status": "Failed",
-                             "message": "Organization not found"})
+            return organization_not_found()
 
-        return Response({"status": "Sucess",
+        return Response({"status": "Success",
                          "message:": "Organization found",
-                         "Organization": serializer.data})
+                         "Organization": serializer_class.data})
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         if not instance:
-            return Response({"status": "Failed",
-                             "message": "Organization not found"})
-        serializer = self.get_serializer(instance, data=request.data, partial=partial)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
+            return organization_not_found()
 
-        if getattr(instance, '_prefetched_objects_cache', None):
-            instance._prefetched_objects_cache = {}
+        serializer_class = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer_class.is_valid(raise_exception=True)
+        self.perform_update(serializer_class)
 
-        return Response({"status": "Sucess",
+        return Response({"status": "Success",
                          "message": "Organization Updated",
-                         "data": serializer.data})
+                         "data": serializer_class.data})
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         if not instance:
-            return Response({"status": "Failed",
-                             "message": "Organization not found"},
-                            status=status.HTTP_204_NO_CONTENT)
+            return organization_not_found()
+
         self.perform_destroy(instance)
-        return Response({"status": "Sucess",
+        return Response({"status": "Success",
                          "message": "Organization deleted"},
                         status=status.HTTP_202_ACCEPTED)
+
+
+def organization_not_found():
+    return Response({"status": "Failed",
+                     "message": "Organization not found"},
+                    status=status.HTTP_204_NO_CONTENT)
