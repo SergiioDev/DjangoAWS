@@ -1,6 +1,6 @@
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from organizations.models import Organization
@@ -10,7 +10,7 @@ from . import serializer
 class OrganizationListCreate(ListCreateAPIView):
     queryset = Organization.objects.all()
     serializer_class = serializer.OrganizationSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
     def create(self, request, *args, **kwargs):
         serializer_class = self.get_serializer(data=request.data)
@@ -33,6 +33,7 @@ class OrganizationListCreate(ListCreateAPIView):
 
 class OrganizationRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = serializer.OrganizationSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return Organization.objects.filter(id=self.kwargs.get('pk'))
