@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Models
-    'organization',
+    'organizations',
     'users',
 
     # REST API

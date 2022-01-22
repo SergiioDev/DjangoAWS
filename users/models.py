@@ -3,7 +3,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.db.models import CASCADE
 from django.utils import timezone
-from organization.models import Organization
+from organizations.models import Organization
 
 
 class CustomAccountManager(BaseUserManager):
