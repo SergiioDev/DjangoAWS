@@ -1,9 +1,9 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
-
-# Create your models here.
+from django.db.models import CASCADE
 from django.utils import timezone
+from organizations.models import Organization
 
 
 class CustomAccountManager(BaseUserManager):
@@ -44,6 +44,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     about = models.TextField('about', max_length=500, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    organization = models.ForeignKey(Organization, on_delete=CASCADE)
+    position = models.CharField(max_length=200, blank=True)
 
     objects = CustomAccountManager()
 

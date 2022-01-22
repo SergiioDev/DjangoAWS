@@ -27,8 +27,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Models
-    'organization',
-    'users'
+    'organizations',
+    'users',
+
+    # REST API
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
