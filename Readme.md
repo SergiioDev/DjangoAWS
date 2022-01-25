@@ -18,8 +18,13 @@ This project is created with Django 4.0
 - API Monitoring using sentry
 - Token-based Authentication system
 
+### Unit Testing
+- Unit testing implemented using Faker
+
 ### Deployment
 The API is deployed using:
 - Docker to containerize the API and have a better testing 
 - GitHub actions to create CI/CD workflows
 - AWS (TODO ADD DESCRIPTION)
+
+
