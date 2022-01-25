@@ -70,7 +70,7 @@ class OrganizationRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
             return organization_not_found()
 
         return Response({"status": "Success",
-                         "message:": "Organization found",
+                         "message": "Organization found",
                          "Organization": serializer_class.data})
 
     def update(self, request, *args, **kwargs):
