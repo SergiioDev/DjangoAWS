@@ -28,13 +28,13 @@ class RefreshAccessTokenTestCase(base_test.NewUserTestCase):
 
     def test_user_login(self):
         client = APIClient()
-        acess_token = client.post('/api/v1/users/token', {'email': self.email,
-                                                          'username': self.username,
-                                                          'password': self.password}, format='json')
+        access_token = client.post('/api/v1/users/token', {'email': self.email,
+                                                           'username': self.username,
+                                                           'password': self.password}, format='json')
 
         refresh_access_token = client.post('/api/v1/users/token', {'email': self.email,
                                                                    'password': self.password,
-                                                                   'refresh': acess_token.json()['refresh']},
+                                                                   'refresh': access_token.json()['refresh']},
                                            format='json')
 
-        self.assertTrue(acess_token.json()['access'] != refresh_access_token.json()['access'])
+        self.assertTrue(access_token.json()['access'] != refresh_access_token.json()['access'])
