@@ -42,6 +42,6 @@ jobs:
           ECR_REPOSITORY: django
           IMAGE_TAG: ${{ steps.tag-number.outputs.tag }}
         run: |
-          docker build -t django .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           
