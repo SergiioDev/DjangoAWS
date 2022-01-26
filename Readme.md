@@ -28,3 +28,23 @@ The API is deployed using:
 - AWS (TODO ADD DESCRIPTION)
 
 
+## How to deploy the API
+- In the root directory of the project execute this commands
+### Windows
+```
+docker-compose up -d  --build
+docker-compose exec web python manage.py collectstatic
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py createsuperuser
+```
+### Linux
+```
+sudo docker-compose up -d  --build
+sudo docker-compose exec web python manage.py collectstatic
+sudo docker-compose exec web python manage.py migrate
+sudo docker-compose exec web python manage.py createsuperuser
+```
+
+
+- Open the url http://localhost/admin and sing in with the admin user that you just created
+

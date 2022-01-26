@@ -12,7 +12,9 @@ pyvenv.cfg
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+
 # Environments
+prod.env
 .env
 .venv
 env/
@@ -20,5 +22,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
 #Default directory for PyCharm IDE
 .idea
