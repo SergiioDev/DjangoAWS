@@ -25,7 +25,7 @@ This project is created with Django 4.0
 The API is deployed using:
 - Docker to containerize the API and have a better testing 
 - GitHub actions to create CI/CD workflows
-- AWS: Deploy the docker image using the .yml file (created with GitHub actions)  into AWS using the EC2 Image Builder
+- AWS: Deploy the docker image using the .yml file (created with GitHub actions)  into AWS using Elastic Container Service (ECR)
 
 
 
