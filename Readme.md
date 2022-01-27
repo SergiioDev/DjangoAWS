@@ -29,7 +29,7 @@ The API is deployed using:
 
 
 
-## How to deploy the API
+## How to run locally the API
 - In the root directory of the project execute this commands
 ### Windows
 ```
