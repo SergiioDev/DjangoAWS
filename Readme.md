@@ -1,10 +1,9 @@
 ## Django AWS
 ### What is this project?
-This is a project to learn more about Unit Testing, Behavior-Driven Development Testing (BDD),
-and create CI/CD workflows for a REST API
+This is a project to learn more about Unit Testing and create CI/CD workflows for a REST API
 
 ### Django
-This project is created with Django 4.0
+This project is created with Django 4.0 and PostgreSQL
 
 ### API Model
 - The api have two models
